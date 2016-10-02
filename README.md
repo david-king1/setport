@@ -11,6 +11,6 @@ There are two main ways to set a port using this program.
 *Note: If no variable name is given, program will look for default  
 value found under PORT.  
 
-In addition to the "-p" or "--port" flag, these flags may be useful:
--h, --help, -?      See the usage screen
+In addition to the "-p" or "--port" flag, these flags may be useful:  
+-h, --help, -?      See the usage screen  
 -v, --version       See the version number
