@@ -1,30 +1,16 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+*This document explains the use of the setport program*
 
+-Ports must be an int between 0 and 65k, non-inclusive
 
-Hi there! Welcome to Cloud9 IDE!
+There are two main ways to set a port using this program.
+1)To set a specific port from the command line, type:
+./setport [-p or --port] [number]
+2)To set a port from an environment variable type:
+./setport [-p or --port] -e [VARIABLE NAME]*
 
-To get you started with C/C++, we have created some small hello world
-applications and a Makefile.
+*Note: If no variable name is given, program will look for default 
+value found under PORT.  
 
-Have a look at the files, and use the terminal to build them:
-
-    $ make
-    $ ./hello-c-world
-    $ ./hello-cpp-world
-
-We're sure you can take it from there. Go ahead and edit the code, 
-or add some new files. It's all up to you! 
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+In addition to the "-p" or "--port" flag, these flags may be useful:
+-h, --help, -?      See the usage screen
+-v, --version       See the version number
