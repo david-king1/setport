@@ -1,0 +1,14 @@
+Uso:    fijar un puerto especifico
+setport     -[flag] [PORT NUMBER]
+-?, --about         da mas informacion sobre el autor del programa
+-h, -!, --help      pone el informacion de uso
+-p, --port          indicador que especifica un puerto, hay que sequirlo con un
+                    entero entre 0 y 65k
+-v, --version       pone el numero de la ultima version    
+
+Codigos de estado de salida:
+0  programa ha salido bien/no hay argumentos
+1  Demasiado argumentos
+2  Argumentos no han seguido las normas de formato (por ejemplo, el primer 
+argumento no empezo con '-' o se dio un numero despues de '-h')
+3  El valor del puerto no esta entre el 0 - 65k

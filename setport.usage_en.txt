@@ -1,0 +1,14 @@
+Usage: set a specified port
+setport     -[flag] [PORT NUMBER]
+-?, --about         gives information about program's author
+-h, -!, --help       prints the usage screen
+-p, --port          flag that specifies a port, must be followed by integer value between 0 and 65k
+-v, --version       prints current version number   
+
+Exit status codes:
+0  program executed successfully/no arguments provided
+1  Too many arguments provided
+2  Arguments did not follow specified format (e.g. first argument 
+did not begin with dash or number was provided after -h flag)
+3  Port value was not in between 0 and 65k
+
