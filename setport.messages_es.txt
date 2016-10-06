@@ -1,0 +1,6 @@
+"Ahora escuchando en el puerto",
+"No hay argumentos. Ve el uso...",
+"Demasiado argumentos. Ver el uso abajo...",
+"Argumentos no validos. Ver el uso para mas informacion...",
+"Variable de entorno no se ha establecido.",
+"Valor del puerto debe estar entre 0 - 65k."
