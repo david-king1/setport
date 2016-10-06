@@ -76,10 +76,10 @@ main(int argc, char* args[]) {
             if (getenv(args[3]) == NULL){
                 cout << msg.at(ENVIRONMENT_NOT_SET) << endl;
                 usage();
+                return 0;
             int portNum = atoi(getenv(args[3]));
             setport(portNum);
             return 0;
-        
             }        
         }
     }
