@@ -1,6 +1,6 @@
 ##This document explains the use of the setport program
 
-\*Ports must be an int between 0 and 65k, non-inclusive
+**Ports must be an int between 0 and 65k, non-inclusive**
 
 There are two main ways to set a port using this program.  
 1)To set a specific port from the command line, type:  
