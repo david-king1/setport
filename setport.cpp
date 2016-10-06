@@ -1,10 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include <regex>
 #include <vector>
 
 using namespace std;
+
+//define constants
+const int PORT_MIN = 0;
+const int PORT_MAX = 65536;
 
 enum {
     NOW_LISTENING,
@@ -15,35 +18,22 @@ enum {
     PORT_RANGE,
 };
 
-vector<string> en = {
-    "Now listening on port",
-    "No arguments provided.  See usage...",
-    "Too many arguments provided.  See usage below...",
-    "Invalid arguments provided.  See usage for more info...",
-    "Enviorment variable for port not set.",
-    "Port value must be between 0 -65k."
-};
-
-vector<string> es = {
-    "Ahora escuchando en el puerto",
-    "No hay argumentos. Ve el uso...",
-    "Demasiado argumentos. Ver el uso abajo...",
-    "Argumentos no validos. Ver el uso para mas informacion...",
-    "Variable de entorno no se ha establecido.",
-    "Valor del puerto debe estar entre 0 - 65k."
-};
-
-//define constants
-const int PORT_MIN = 0;
-const int PORT_MAX = 65536;
- 
 void usage();
 void about();
 void setport(int port);
 
-vector<string> msg = es;
+vector<string> msg;
+string language = "en";
 
 main(int argc, char* args[]) {
+    
+    
+    ifstream message_file("setport.messages_" + language +".txt");
+    string l;
+    while (getline(message_file, l)){
+        msg.push_back(l);
+    }
+    message_file.close();
     //check for correct number of arguments
     if (argc == 1) {
         cout << msg.at(NO_ARGS) << endl;
@@ -101,7 +91,7 @@ main(int argc, char* args[]) {
 
 void usage(){
     ifstream usage_file;
-    usage_file.open("setport.usage_es.txt");
+    usage_file.open("setport.usage_" + language + ".txt");
     string line;
     while (getline(usage_file, line)){
         cout << line << endl;
@@ -111,7 +101,7 @@ void usage(){
 
 void about(){
     ifstream about_file;
-    about_file.open("setport.about_es.txt");
+    about_file.open("setport.about_" + language + ".txt");
     string line;
     while (getline(about_file, line)){
         cout << line << endl;
