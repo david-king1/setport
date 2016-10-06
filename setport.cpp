@@ -42,7 +42,6 @@ void about();
 void setport(int port);
 
 vector<string> msg = es;
-regex re ("[a-z]");
 
 main(int argc, char* args[]) {
     //check for correct number of arguments
