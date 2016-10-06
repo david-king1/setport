@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <stdlib.h>
+#include <string>
 #include <vector>
+#include <cstdlib>
 
 using namespace std;
 
@@ -23,10 +24,18 @@ void about();
 void setport(int port);
 
 vector<string> msg;
-string language = "en";
+string language = "en"; //default to English
 
 main(int argc, char* args[]) {
+    //determine environment lang
+    if (getenv("LANGUAGE") != NULL)
+    {
+        language = getenv("LANGUAGE");
+        language = language.substr(0,2);    
+        cout << language << endl;
+    }
     
+    language = "es";
     
     ifstream message_file("setport.messages_" + language +".txt");
     string l;
@@ -140,8 +149,7 @@ string locale;
 //null
 //""
 //"C"
-//"C.UTF-8"
-
+//"C.UT
 string language;
 //if no locale value, default the language to English
 
