@@ -26,43 +26,31 @@ vector<string> msg;
 string language = "en"; //default to English
 
 main(int argc, char* args[]) {
-    //determine environment lang
-    if (getenv("LANGUAGE") != NULL)
-    {
-        language = getenv("LANGUAGE");
-        language = language.substr(0,2);    
-        cout << language << endl;
-    }
-    //2. LC_ALL
-    if (getenv("LC_ALL") != NULL)
-    {
-        language = getenv("LANGUAGE");
-        language = language.substr(0,2);    
-        cout << language << endl;
+    //determine environment language, reverse order will assure that the highest priority
+    //variable (given that it is not null) will be the one used
+    //4. LANG
+    if (getenv("LANG") != NULL){
+        language = getenv("LANG");
     }
     //3. LC_MESSAGES, (LC_TIME, ...)
-    if (getenv("LC_MESSAGES") != NULL)
-    {
-        language = getenv("LANGUAGE");
-        language = language.substr(0,2);    
-        cout << language << endl;
+    if (getenv("LC_MESSAGES") != NULL){
+        language = getenv("LC_MESSAGES");
     }
-    //4. LANG
-    if (getenv("LANG") != NULL)
-    {
+    //2. LC_ALL
+    if (getenv("LC_ALL") != NULL){
+        language = getenv("LC_ALL");
+    }
+    //1. LANGUAGE
+    if (getenv("LANGUAGE") != NULL){
         language = getenv("LANGUAGE");
-        language = language.substr(0,2);    
-        cout << language << endl;
     }
     language = "en";
     
-    ifstream message_file("setport.messages_" + language +".txt");
+    ifstream message_file("setport.messages_en.txt");
     string message_line;
-    
     while (getline(message_file, message_line)){
         msg.push_back(message_line);
     }
-    message_file.close();
     //check for correct number of arguments
     if (argc == 1) {
         cout << msg.at(NO_ARGS) << endl;
@@ -138,15 +126,6 @@ void setport(int port){
 }
 
 /*
-string* msg = en; //defaults to English
-
-//demo of a function that can print out messages in any language WITHOUT BEING AWARE OF THE LANGUAGE BEING USED
-void someProcess() {
-   cout << msg[HELLO] << endl;
-   cout << msg[TOO_MANY_PARAMETERS] << endl;
-   cout << msg[GOODBYE] << endl;
-   cout << "-----------" << endl;
-}
 
 int main(int argc, char *args[]) {
 string locale;
