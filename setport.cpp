@@ -7,8 +7,8 @@
 using namespace std;
 
 //define constants
-const int PORT_MIN = 0;
-const int PORT_MAX = 65536;
+const int PORT_MIN = 1;
+const int PORT_MAX = 65535;
 
 enum {
     NOW_LISTENING,
@@ -19,8 +19,7 @@ enum {
     PORT_RANGE,
 };
 
-void usage();
-void about();
+void print_file(string filename);
 void setport(int port);
 
 vector<string> msg;
@@ -34,30 +33,51 @@ main(int argc, char* args[]) {
         language = language.substr(0,2);    
         cout << language << endl;
     }
-    
-    language = "es";
+    //2. LC_ALL
+    if (getenv("LC_ALL") != NULL)
+    {
+        language = getenv("LANGUAGE");
+        language = language.substr(0,2);    
+        cout << language << endl;
+    }
+    //3. LC_MESSAGES, (LC_TIME, ...)
+    if (getenv("LC_MESSAGES") != NULL)
+    {
+        language = getenv("LANGUAGE");
+        language = language.substr(0,2);    
+        cout << language << endl;
+    }
+    //4. LANG
+    if (getenv("LANG") != NULL)
+    {
+        language = getenv("LANGUAGE");
+        language = language.substr(0,2);    
+        cout << language << endl;
+    }
+    language = "en";
     
     ifstream message_file("setport.messages_" + language +".txt");
-    string l;
-    while (getline(message_file, l)){
-        msg.push_back(l);
+    string message_line;
+    
+    while (getline(message_file, message_line)){
+        msg.push_back(message_line);
     }
     message_file.close();
     //check for correct number of arguments
     if (argc == 1) {
         cout << msg.at(NO_ARGS) << endl;
-        usage();
+        print_file("setport.usage_");
         return 0;
     }
     if (argc > 4) {
         cout << msg.at(TOO_MANY_ARGS) << endl;
-        usage();
+        print_file("setport.usage_");
         return 1;
     }
     //get first flag
     string flag1 = args[1];
     if ((flag1 == "-!" || flag1 == "--about") && (argc == 2)){
-        about();
+        print_file("setport.about_");
         return 0;
     }
     //print version number
@@ -66,7 +86,7 @@ main(int argc, char* args[]) {
         return 0;
     }
     if ((flag1 == "-h" || flag1 == "--help" || flag1 == "-?") && (argc == 2)) {
-        usage();
+        print_file("setport.usage_");
         return 0;
     }
     if ((flag1 == "-p" || flag1 == "--port") && (argc ==3)){
@@ -84,7 +104,7 @@ main(int argc, char* args[]) {
         if (flag2 == "-e") {
             if (getenv(args[3]) == NULL){
                 cout << msg.at(ENVIRONMENT_NOT_SET) << endl;
-                usage();
+                print_file("setport.usage_");
                 return 0;
             int portNum = atoi(getenv(args[3]));
             setport(portNum);
@@ -94,33 +114,24 @@ main(int argc, char* args[]) {
     }
     // all other cases are fail cases print error message and usage
     cout << msg.at(INVALID_ARGS) << endl;
-    usage();
+    print_file("setport.usage_");
     return 2;
 }
 
-void usage(){
-    ifstream usage_file;
-    usage_file.open("setport.usage_" + language + ".txt");
+void print_file(string filename){
+    ifstream file;
+    file.open(filename + language + ".txt");
     string line;
-    while (getline(usage_file, line)){
+    while (getline(file, line)){
         cout << line << endl;
     }
-    usage_file.close();
+    file.close();
 }
 
-void about(){
-    ifstream about_file;
-    about_file.open("setport.about_" + language + ".txt");
-    string line;
-    while (getline(about_file, line)){
-        cout << line << endl;
-    }
-    about_file.close();
-}
 void setport(int port){
-    if (port <= PORT_MIN || port >= PORT_MAX) {
+    if (port < PORT_MIN || port > PORT_MAX) {
         cout << msg.at(PORT_RANGE) << endl;
-        usage();
+        print_file("setport.usage_");
         exit(3);
     }
     cout  << msg.at(NOW_LISTENING) << port << endl;
