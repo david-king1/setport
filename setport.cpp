@@ -45,7 +45,7 @@ main(int argc, char* args[]) {
         language = getenv("LANGUAGE");
     }
     language = "en";
-    
+
     ifstream message_file("setport.messages_en.txt");
     string message_line;
     while (getline(message_file, message_line)){
@@ -79,7 +79,7 @@ main(int argc, char* args[]) {
     }
     if ((flag1 == "-p" || flag1 == "--port") && (argc ==3)){
         string flag2 = args[2];
-        if (flag2 == "-e") {
+        if (flag2 == "-e" || flag2 == "--environment") {
             int portNum = atoi(getenv("PORT"));
             setport(portNum);
             return 0;
@@ -89,7 +89,7 @@ main(int argc, char* args[]) {
     }
     if ((flag1 == "-p" || flag1 == "--port") && (argc == 4)){
         string flag2 = args[2];
-        if (flag2 == "-e") {
+        if (flag2 == "-e" || flag2 == "--environment") {
             if (getenv(args[3]) == NULL){
                 cout << msg.at(ENVIRONMENT_NOT_SET) << endl;
                 print_file("setport.usage_");
@@ -97,7 +97,7 @@ main(int argc, char* args[]) {
             int portNum = atoi(getenv(args[3]));
             setport(portNum);
             return 0;
-            }        
+            }
         }
     }
     // all other cases are fail cases print error message and usage

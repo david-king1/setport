@@ -7,9 +7,9 @@ using namespace std;
 
 
 main(int argc, char* args[]){
-    
+
     string FILE_OUTPUT_STREAM = " > /dev/null";
-    
+
     fstream test_file;
     test_file.open("portsettertest.txt");
     string line;
@@ -34,7 +34,7 @@ main(int argc, char* args[]){
     test_cases.push_back("./portsetter.cpp.o -p 4040 > /dev/null");
     test_cases.push_back("./portsetter.cpp.o --port 4040 > /dev/null");
     //sad path
-   /* test_cases.push_back("./portsetter.cpp.o help");
+    /* test_cases.push_back("./portsetter.cpp.o help");
     test_cases.push_back("./portsetter.cpp.o -help");
     test_cases.push_back("./portsetter.cpp.o --h");
     test_cases.push_back("./portsetter.cpp.o -h --help");
@@ -47,7 +47,7 @@ main(int argc, char* args[]){
     test_cases.push_back("./portsetter.cpp.o -p 90642");
     test_cases.push_back("./portsetter.cpp.o -x 45321");
     test_cases.push_back("./portsetter.cpp.o -P 714");
-    
+
     //positive tests
     for (int i = 0; i < 5; ++i){
         int statusCode = system(test_cases[i].c_str()) / 256;
@@ -57,7 +57,7 @@ main(int argc, char* args[]){
     for (int i = 5; i < 18; ++i){
         int statusCode = system(test_cases[i].c_str()) / 256;
         test_results.push_back(statusCode);
-    } 
+    }
 
     for (int j = 0; j < 18; ++j){
         cout << test_results[j] << endl;
